@@ -1,5 +1,6 @@
 package com.peng.mongo.service.impl;
 
+import com.peng.mongo.common.compent.MongoMember;
 import com.peng.mongo.dao.MongoMemberReadHistoryRepository;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
@@ -27,6 +28,15 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
+    public List<MongoMemberReadHistory> createMany(List<MongoMemberReadHistory> memberReadHistoryList) {
+        for (MongoMemberReadHistory memberReadHistory : memberReadHistoryList) {
+            memberReadHistory.setId(null);
+            memberReadHistory.setCreateTime(new Date());
+        }
+        return memberReadHistoryRepository.saveAll(memberReadHistoryList);
+    }
+
+    @Override
     public int delete(List<String> ids) {
         if (!(ids.size() > 0)) {
             return 0;
@@ -49,7 +59,27 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
-    public List<MongoMemberReadHistory> list(Long memberId) {
+    public List<MongoMemberReadHistory> listAll() {
+        return memberReadHistoryRepository.findAll();
+    }
+
+    @Override
+    public List<MongoMemberReadHistory> listByMemberId(Long memberId) {
         return memberReadHistoryRepository.findByMemberIdOrderByCreateTimeDesc(memberId);
+    }
+
+    @Override
+    public List<Long> findProductIdsByMemberNickname(String memberNickname) {
+        return memberReadHistoryRepository.findProductIdByMemberNicknameOrderByCreateTimeDesc(memberNickname);
+    }
+
+    @Override
+    public List<MongoMember> findMemberByProductId(Long productId) {
+        return memberReadHistoryRepository.findMemberIdAndMemberNicknameAndMemberIconByProductIdOrderByCreateTimeDesc(productId);
+    }
+
+    @Override
+    public List<MongoMemberReadHistory> findByProductDesc(String productDesc) {
+        return memberReadHistoryRepository.findByProductDesc(productDesc);
     }
 }

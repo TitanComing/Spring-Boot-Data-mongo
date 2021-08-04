@@ -35,7 +35,7 @@ class MemberReadHistoryServiceTest {
 
     @Test
     void list() {
-        log.info(memberReadHistoryService.list(1L));
-        Assertions.assertEquals(memberReadHistoryService.list(1L).get(0).getProductId(),3L);
+        log.info(memberReadHistoryService.listByMemberId(1L));
+        Assertions.assertEquals(memberReadHistoryService.listByMemberId(1L).get(0).getProductId(),3L);
     }
 }

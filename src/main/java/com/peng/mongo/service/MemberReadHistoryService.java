@@ -2,6 +2,8 @@ package com.peng.mongo.service;
 
 import com.peng.mongo.common.compent.MongoMember;
 import com.peng.mongo.model.MongoMemberReadHistory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,6 +42,21 @@ public interface MemberReadHistoryService {
      * 通过用户id获取用户浏览历史记录
      */
     List<MongoMemberReadHistory> listByMemberId(Long memberId);
+
+    /**
+     *  分页查询用户浏览历史
+     */
+    Page<MongoMemberReadHistory> getPagedMemberReadHistory(Pageable pageable);
+
+    /**
+     *  根据对象查找
+     */
+    List<MongoMemberReadHistory> getMemberReadHistoryByExample(MongoMemberReadHistory memberReadHistory);
+
+    /**
+     *  根据商品描述搜索
+     */
+    List<MongoMemberReadHistory> getReadHistoryByDesc(String desc);
 
     /**
      * 根据会员名称按时间倒序获取商品ids

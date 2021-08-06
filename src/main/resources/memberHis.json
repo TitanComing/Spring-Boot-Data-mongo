@@ -7,7 +7,7 @@
     "productName": "gaoda",
     "productPic": "1",
     "productSubTitle": "玩具",
-    "productPrice": "6.236",
+    "productPrice": 6.236,
     "productDesc": "机器人玩具 ",
     "createTime": "2021-08-03"
   },
@@ -19,7 +19,7 @@
     "productName": "buibuibui",
     "productPic": "1",
     "productSubTitle": "玩具",
-    "productPrice": "2.236",
+    "productPrice": 2.266,
     "productDesc": "玩具枪",
     "createTime": "2021-08-03"
   },
@@ -31,7 +31,7 @@
     "productName": "衬衣",
     "productPic": "2",
     "productSubTitle": "衣物",
-    "productPrice": "8.236",
+    "productPrice": 8.436,
     "productDesc": "衣服 男 衬衣 白色",
     "createTime": "2021-08-03"
   },
@@ -43,7 +43,7 @@
     "productName": "T恤",
     "productPic": "2",
     "productSubTitle": "衣物",
-    "productPrice": "7",
+    "productPrice": 7,
     "productDesc": "衣服 男 T恤 黑色",
     "createTime": "2021-08-03"
   },
@@ -55,7 +55,7 @@
     "productName": "gaoda",
     "productPic": "1",
     "productSubTitle": "玩具",
-    "productPrice": "6.236",
+    "productPrice": 9.2363,
     "productDesc": "机器人玩具 ",
     "createTime": "2021-08-03"
   },
@@ -67,7 +67,7 @@
     "productName": "T恤",
     "productPic": "2",
     "productSubTitle": "衣物",
-    "productPrice": "7",
+    "productPrice": 16.23,
     "productDesc": "衣服 男 T恤 黑色",
     "createTime": "2021-08-03"
   }

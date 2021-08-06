@@ -5,6 +5,8 @@ import com.peng.mongo.dao.MongoMemberReadHistoryRepository;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -66,6 +68,26 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     @Override
     public List<MongoMemberReadHistory> listByMemberId(Long memberId) {
         return memberReadHistoryRepository.findByMemberIdOrderByCreateTimeDesc(memberId);
+    }
+
+    @Override
+    public Page<MongoMemberReadHistory> getPagedMemberReadHistory(Pageable pageable) {
+        //PageRequest pageRequest = PageRequest.of(0,2, Sort.by(Sort.Direction.ASC, "productPrice"));
+        PageRequest pageRequest = PageRequest.of(0, 2, Sort.by(Sort.Order.asc("productPrice"), Sort.Order.desc("productId")));
+        return memberReadHistoryRepository.findPagedMemberReadHistoryBy(pageRequest);
+    }
+
+    @Override
+    public List<MongoMemberReadHistory> getMemberReadHistoryByExample(MongoMemberReadHistory memberReadHistory) {
+        Example<MongoMemberReadHistory> historyExample = Example.of(memberReadHistory);
+        //Example<MongoMemberReadHistory> historyExample = Example.of(memberReadHistory, ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.REGEX))
+        return memberReadHistoryRepository.findAll(historyExample);
+    }
+
+    @Override
+    public List<MongoMemberReadHistory> getReadHistoryByDesc(String desc) {
+        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(desc);
+        return memberReadHistoryRepository.findAllBy(criteria);
     }
 
     @Override

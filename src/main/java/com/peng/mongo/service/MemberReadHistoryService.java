@@ -1,11 +1,7 @@
 package com.peng.mongo.service;
 
-import com.peng.mongo.common.compent.MongoMember;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -70,6 +66,11 @@ public interface MemberReadHistoryService {
     List<MongoMemberReadHistory> listMemberReadHistoryByExample(MongoMemberReadHistory memberReadHistory);
 
     /**
+     * 根据商品描述模糊查找
+     */
+    List<MongoMemberReadHistory> listByProductDesc(String productDesc);
+
+    /**
      *  查询某个用户某个产品的浏览你信息
      */
     List<MongoMemberReadHistory> listMemberProductReadHis(Long memberId, Long productId);
@@ -77,7 +78,7 @@ public interface MemberReadHistoryService {
     /**
      *  统计浏览产品总价格（测试用，没啥意义）
      */
-    List<MongoMemberReadHistory> countByProducts(Sort sort);
+    List<MongoMemberReadHistory> countByProducts();
 
     /**
      *  统计用户浏览次数
@@ -88,19 +89,4 @@ public interface MemberReadHistoryService {
      *  统计用户不同商品浏览次数
      */
     Long countReadHistoryByMemberAndProduct(Long memberId);
-
-    /**
-     * 根据商品描述模糊查找
-     */
-    List<MongoMemberReadHistory> listByProductDesc(String productDesc);
-
-    /**
-     * 根据会员名称按时间倒序获取商品ids
-     */
-    List<Long> listProductIdsByMemberNickname(String memberNickname);
-
-    /**
-     * 根据商品id按时间倒序获取浏览人信息
-     */
-    List<MongoMember> listMemberByProductId(Long productId);
 }

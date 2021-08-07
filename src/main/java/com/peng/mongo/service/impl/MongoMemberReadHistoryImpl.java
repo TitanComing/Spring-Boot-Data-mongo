@@ -1,6 +1,5 @@
 package com.peng.mongo.service.impl;
 
-import com.peng.mongo.common.compent.MongoMember;
 import com.peng.mongo.dao.MongoMemberReadHistoryRepository;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
@@ -10,7 +9,6 @@ import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -103,12 +101,18 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
+    public List<MongoMemberReadHistory> listByProductDesc(String description) {
+        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(description);
+        return memberReadHistoryRepository.findAllByProductDesc(criteria);
+    }
+
+    @Override
     public List<MongoMemberReadHistory> listMemberProductReadHis(Long memberId, Long productId) {
         return memberReadHistoryRepository.findMemberProductReadHis(memberId, productId);
     }
 
     @Override
-    public List<MongoMemberReadHistory> countByProducts(Sort sort) {
+    public List<MongoMemberReadHistory> countByProducts() {
         return memberReadHistoryRepository.countByProducts(Sort.by(Sort.Direction.DESC, "productPrice"));
     }
 
@@ -120,21 +124,5 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     @Override
     public Long countReadHistoryByMemberAndProduct(Long memberId) {
         return memberReadHistoryRepository.countReadHistoryByMemberAndProduct(memberId);
-    }
-
-    @Override
-    public List<MongoMemberReadHistory> listByProductDesc(String description) {
-        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(description);
-        return memberReadHistoryRepository.findAllByProductDesc(criteria);
-    }
-
-    @Override
-    public List<Long> listProductIdsByMemberNickname(String memberNickname) {
-        return memberReadHistoryRepository.findProductIdByMemberNicknameOrderByCreateTimeDesc(memberNickname);
-    }
-
-    @Override
-    public List<MongoMember> listMemberByProductId(Long productId) {
-        return memberReadHistoryRepository.findMemberIdAndMemberNicknameAndMemberIconByProductIdOrderByCreateTimeDesc(productId);
     }
 }

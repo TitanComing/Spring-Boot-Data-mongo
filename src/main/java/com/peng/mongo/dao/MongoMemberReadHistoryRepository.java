@@ -1,9 +1,7 @@
 package com.peng.mongo.dao;
 
-import com.peng.mongo.common.compent.MongoMember;
+
 import com.peng.mongo.model.MongoMemberReadHistory;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.repository.Aggregation;
@@ -32,9 +30,16 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
     List<MongoMemberReadHistory> findByProductId(Long productId, Sort sort);
 
     /**
+     * 根据商品描述搜索
+     *
+     * @param criteria 商品描述
+     */
+    List<MongoMemberReadHistory> findAllByProductDesc(TextCriteria criteria);
+
+    /**
      * 查询某个用户某个产品的浏览你信息
      *
-     * @param memberId 用户id
+     * @param memberId  用户id
      * @param productId 产品id
      */
     @Query("{'memberId':?0,'productId':?1}")
@@ -63,26 +68,5 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
      */
     @Aggregation(pipeline = {"{$match:{memberId: ?0}}", "{$group:{_id:$productId}}", "{$count: total}"})
     Long countReadHistoryByMemberAndProduct(Long memberId);
-
-    /**
-     * 根据商品描述搜索
-     *
-     * @param criteria 商品描述
-     */
-    List<MongoMemberReadHistory> findAllByProductDesc(TextCriteria criteria);
-
-    /**
-     * 根据会员名称按时间倒序获取商品ids
-     *
-     * @param memberNickname 会员名称
-     */
-    List<Long> findProductIdByMemberNicknameOrderByCreateTimeDesc(String memberNickname);
-
-    /**
-     * 根据商品id按时间倒序获取浏览人信息
-     *
-     * @param productId 商品id
-     */
-    List<MongoMember> findMemberIdAndMemberNicknameAndMemberIconByProductIdOrderByCreateTimeDesc(Long productId);
 
 }

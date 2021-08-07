@@ -32,14 +32,16 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
     List<MongoMemberReadHistory> findByProductId(Long productId, Sort sort);
 
     /**
-     * 分页查询浏览记录
+     * 查询某个用户某个产品的浏览你信息
      *
-     * @param pageable 查询分页参数
+     * @param memberId 用户id
+     * @param productId 产品id
      */
-    Page<MongoMemberReadHistory> findPagedMemberReadHistoryBy(Pageable pageable);
+    @Query("{'memberId':?0,'productId':?1}")
+    List<MongoMemberReadHistory> findMemberProductReadHis(Long memberId, Long productId);
 
     /**
-     * 统计产品总价格（测试用，没啥意义）
+     * 统计浏览产品总价格（测试用，没啥意义）
      *
      * @param sort 排序方式
      */
@@ -48,23 +50,26 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
 
     /**
      * 统计用户浏览次数
+     *
      * @param memberId 用户id
      */
     @Aggregation(pipeline = {"{$match:{memberId: ?0}}", "{$count: total}"})
     Long countReadHistoryByMember(Long memberId);
 
     /**
-     * 根据会员名称按时间倒序获取浏览记录
+     * 统计用户商品的浏览次数
      *
-     * @param memberNickname 会员名称
+     * @param memberId 用户id
      */
-    List<MongoMemberReadHistory> findByMemberNicknameOrderByCreateTimeDesc(String memberNickname);
+    @Aggregation(pipeline = {"{$match:{memberId: ?0}}", "{$group:{_id:$productId}}", "{$count: total}"})
+    Long countReadHistoryByMemberAndProduct(Long memberId);
 
     /**
      * 根据商品描述搜索
+     *
      * @param criteria 商品描述
      */
-    List<MongoMemberReadHistory> findAllBy(TextCriteria criteria);
+    List<MongoMemberReadHistory> findAllByProductDesc(TextCriteria criteria);
 
     /**
      * 根据会员名称按时间倒序获取商品ids
@@ -79,13 +84,5 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
      * @param productId 商品id
      */
     List<MongoMember> findMemberIdAndMemberNicknameAndMemberIconByProductIdOrderByCreateTimeDesc(Long productId);
-
-    /**
-     * 根据商品描述模糊查找
-     *
-     * @param productDesc 商品描述
-     */
-    @Query(value = "select * from mongoMemberReadHistory where productDesc like ?1", sort = "productPrice")
-    List<MongoMemberReadHistory> findByProductDesc(String productDesc);
 
 }

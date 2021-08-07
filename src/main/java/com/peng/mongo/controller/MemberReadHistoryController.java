@@ -22,12 +22,12 @@ public class MemberReadHistoryController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public CommonResult<MongoMemberReadHistory> create(@RequestBody MongoMemberReadHistory memberReadHistory) {
-        return CommonResult.success(memberReadHistoryService.create(memberReadHistory));
+        return CommonResult.success(memberReadHistoryService.insert(memberReadHistory));
     }
 
     @RequestMapping(value = "/createMany", method = RequestMethod.POST)
     public CommonResult<List<MongoMemberReadHistory>> create(@RequestBody List<MongoMemberReadHistory> memberReadHistoryList) {
-        return CommonResult.success(memberReadHistoryService.createMany(memberReadHistoryList));
+        return CommonResult.success(memberReadHistoryService.insertAll(memberReadHistoryList));
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -59,19 +59,19 @@ public class MemberReadHistoryController {
 
     @RequestMapping(value = "/listProdIdsByMemberName", method = RequestMethod.GET)
     public CommonResult<List<Long>> listProdIdsByMemberName(@RequestParam("memberName") String memberName) {
-        List<Long> ids = memberReadHistoryService.findProductIdsByMemberNickname(memberName);
+        List<Long> ids = memberReadHistoryService.listProductIdsByMemberNickname(memberName);
         return CommonResult.success(ids);
     }
 
     @RequestMapping(value = "/listMemberByProductId", method = RequestMethod.GET)
     public CommonResult<List<MongoMember>> listMemberByProductId(@RequestParam("productId") Long productId) {
-        List<MongoMember> members = memberReadHistoryService.findMemberByProductId(productId);
+        List<MongoMember> members = memberReadHistoryService.listMemberByProductId(productId);
         return CommonResult.success(members);
     }
 
     @RequestMapping(value = "/listByProductDesc", method = RequestMethod.GET)
     public CommonResult<List<MongoMemberReadHistory>> listByProductDesc(@RequestParam("productDesc") String productDesc) {
-        List<MongoMemberReadHistory> memberReadHistoryList = memberReadHistoryService.findByProductDesc(productDesc);
+        List<MongoMemberReadHistory> memberReadHistoryList = memberReadHistoryService.listByProductDesc(productDesc);
         return CommonResult.success(memberReadHistoryList);
     }
 }

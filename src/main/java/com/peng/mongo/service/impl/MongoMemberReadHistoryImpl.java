@@ -4,6 +4,7 @@ import com.peng.mongo.common.compent.MongoMember;
 import com.peng.mongo.dao.MongoMemberReadHistoryRepository;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.query.TextCriteria;
@@ -12,30 +13,32 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 会员浏览记录管理Service实现类
  * Create by peng on 2021/8/3.
  */
+@Log4j2
 @Service
 public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     @Autowired
     private MongoMemberReadHistoryRepository memberReadHistoryRepository;
 
     @Override
-    public MongoMemberReadHistory create(MongoMemberReadHistory memberReadHistory) {
+    public MongoMemberReadHistory insert(MongoMemberReadHistory memberReadHistory) {
         memberReadHistory.setId(null);
         memberReadHistory.setCreateTime(new Date());
-        return memberReadHistoryRepository.save(memberReadHistory);
+        return memberReadHistoryRepository.insert(memberReadHistory);
     }
 
     @Override
-    public List<MongoMemberReadHistory> createMany(List<MongoMemberReadHistory> memberReadHistoryList) {
+    public List<MongoMemberReadHistory> insertAll(List<MongoMemberReadHistory> memberReadHistoryList) {
         for (MongoMemberReadHistory memberReadHistory : memberReadHistoryList) {
             memberReadHistory.setId(null);
             memberReadHistory.setCreateTime(new Date());
         }
-        return memberReadHistoryRepository.saveAll(memberReadHistoryList);
+        return memberReadHistoryRepository.insert(memberReadHistoryList);
     }
 
     @Override
@@ -43,13 +46,7 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
         if (!(ids.size() > 0)) {
             return 0;
         }
-        List<MongoMemberReadHistory> deleteList = new ArrayList<>();
-        for (String id : ids) {
-            MongoMemberReadHistory memberReadHistory = new MongoMemberReadHistory();
-            memberReadHistory.setId(id);
-            deleteList.add(memberReadHistory);
-        }
-        memberReadHistoryRepository.deleteAll(deleteList);
+        memberReadHistoryRepository.deleteAllById(ids);
         return ids.size();
     }
 
@@ -58,6 +55,22 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
         long count = memberReadHistoryRepository.count();
         memberReadHistoryRepository.deleteAll();
         return count;
+    }
+
+    @Override
+    public MongoMemberReadHistory update(MongoMemberReadHistory memberReadHistory) {
+        if (Objects.isNull(memberReadHistory.getMemberId())) {
+            throw new RuntimeException("id不能为空");
+        }
+        if (!memberReadHistoryRepository.findById(memberReadHistory.getId()).isPresent()) {
+            throw new RuntimeException("查找不到需更新的对象");
+        }
+        return memberReadHistoryRepository.save(memberReadHistory);
+    }
+
+    @Override
+    public MongoMemberReadHistory insertOrUpdate(MongoMemberReadHistory memberReadHistory) {
+        return memberReadHistoryRepository.save(memberReadHistory);
     }
 
     @Override
@@ -71,37 +84,57 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
-    public Page<MongoMemberReadHistory> getPagedMemberReadHistory(Pageable pageable) {
-        //PageRequest pageRequest = PageRequest.of(0,2, Sort.by(Sort.Direction.ASC, "productPrice"));
-        PageRequest pageRequest = PageRequest.of(0, 2, Sort.by(Sort.Order.asc("productPrice"), Sort.Order.desc("productId")));
-        return memberReadHistoryRepository.findPagedMemberReadHistoryBy(pageRequest);
+    public List<MongoMemberReadHistory> listByProductId(Long productId) {
+        return memberReadHistoryRepository.findByProductId(productId, Sort.by(Sort.Order.desc("productPrice"), Sort.Order.asc("productPic")));
     }
 
     @Override
-    public List<MongoMemberReadHistory> getMemberReadHistoryByExample(MongoMemberReadHistory memberReadHistory) {
+    public Page<MongoMemberReadHistory> listPagedMemberReadHistory(int page, int size) {
+        //PageRequest pageRequest = PageRequest.of(0,2, Sort.by(Sort.Direction.ASC, "productPrice"));
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Order.asc("productPrice"), Sort.Order.desc("productId")));
+        return memberReadHistoryRepository.findAll(pageRequest);
+    }
+
+    @Override
+    public List<MongoMemberReadHistory> listMemberReadHistoryByExample(MongoMemberReadHistory memberReadHistory) {
         Example<MongoMemberReadHistory> historyExample = Example.of(memberReadHistory);
         //Example<MongoMemberReadHistory> historyExample = Example.of(memberReadHistory, ExampleMatcher.matching().withStringMatcher(ExampleMatcher.StringMatcher.REGEX))
         return memberReadHistoryRepository.findAll(historyExample);
     }
 
     @Override
-    public List<MongoMemberReadHistory> getReadHistoryByDesc(String desc) {
-        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(desc);
-        return memberReadHistoryRepository.findAllBy(criteria);
+    public List<MongoMemberReadHistory> listMemberProductReadHis(Long memberId, Long productId) {
+        return memberReadHistoryRepository.findMemberProductReadHis(memberId, productId);
     }
 
     @Override
-    public List<Long> findProductIdsByMemberNickname(String memberNickname) {
+    public List<MongoMemberReadHistory> countByProducts(Sort sort) {
+        return memberReadHistoryRepository.countByProducts(Sort.by(Sort.Direction.DESC, "productPrice"));
+    }
+
+    @Override
+    public Long countReadHistoryByMember(Long memberId) {
+        return memberReadHistoryRepository.countReadHistoryByMember(memberId);
+    }
+
+    @Override
+    public Long countReadHistoryByMemberAndProduct(Long memberId) {
+        return memberReadHistoryRepository.countReadHistoryByMemberAndProduct(memberId);
+    }
+
+    @Override
+    public List<MongoMemberReadHistory> listByProductDesc(String description) {
+        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(description);
+        return memberReadHistoryRepository.findAllByProductDesc(criteria);
+    }
+
+    @Override
+    public List<Long> listProductIdsByMemberNickname(String memberNickname) {
         return memberReadHistoryRepository.findProductIdByMemberNicknameOrderByCreateTimeDesc(memberNickname);
     }
 
     @Override
-    public List<MongoMember> findMemberByProductId(Long productId) {
+    public List<MongoMember> listMemberByProductId(Long productId) {
         return memberReadHistoryRepository.findMemberIdAndMemberNicknameAndMemberIconByProductIdOrderByCreateTimeDesc(productId);
-    }
-
-    @Override
-    public List<MongoMemberReadHistory> findByProductDesc(String productDesc) {
-        return memberReadHistoryRepository.findByProductDesc(productDesc);
     }
 }

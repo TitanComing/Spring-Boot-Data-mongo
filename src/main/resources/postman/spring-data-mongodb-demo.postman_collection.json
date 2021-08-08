@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "ef366da0-41ca-4ba9-8751-029f4d8fa4b7",
+		"name": "spring-data-mongodb-demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/member/readHistory/deleteAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/deleteAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"deleteAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/createAll",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n  {\n    \"memberId\": 1,\n    \"memberNickname\": \"zhangsan\",\n    \"memberIcon\": \"abc\",\n    \"productId\": 1,\n    \"productName\": \"plaything gaoda wuzang\",\n    \"productPic\": \"1\",\n    \"productSubTitle\": \"玩具\",\n    \"productPrice\": 6.236,\n    \"productDesc\": \"机器人玩具 \",\n    \"createTime\": \"2021-08-03\"\n  },\n  {\n    \"memberId\": 1,\n    \"memberNickname\": \"zhangsan\",\n    \"memberIcon\": \"abc\",\n    \"productId\": 2,\n    \"productName\": \"plaything guns shoot\",\n    \"productPic\": \"1\",\n    \"productSubTitle\": \"玩具\",\n    \"productPrice\": 2.266,\n    \"productDesc\": \"玩具枪\",\n    \"createTime\": \"2021-08-03\"\n  },\n  {\n    \"memberId\": 1,\n    \"memberNickname\": \"zhangsan\",\n    \"memberIcon\": \"abc\",\n    \"productId\": 3,\n    \"productName\": \"clothes shirt\",\n    \"productPic\": \"2\",\n    \"productSubTitle\": \"衣物\",\n    \"productPrice\": 8.436,\n    \"productDesc\": \"衣服 男 衬衣 白色\",\n    \"createTime\": \"2021-08-03\"\n  },\n  {\n    \"memberId\": 1,\n    \"memberNickname\": \"zhangsan\",\n    \"memberIcon\": \"abc\",\n    \"productId\": 4,\n    \"productName\": \"clothes T-shirt\",\n    \"productPic\": \"2\",\n    \"productSubTitle\": \"衣物\",\n    \"productPrice\": 7,\n    \"productDesc\": \"衣服 男 T恤 黑色\",\n    \"createTime\": \"2021-08-03\"\n  },\n  {\n    \"memberId\": 2,\n    \"memberNickname\": \"lisi\",\n    \"memberIcon\": \"def\",\n    \"productId\": 1,\n    \"productName\": \"plaything gaoda wuzang\",\n    \"productPic\": \"1\",\n    \"productSubTitle\": \"玩具\",\n    \"productPrice\": 9.2363,\n    \"productDesc\": \"机器人玩具 \",\n    \"createTime\": \"2021-08-03\"\n  },\n  {\n    \"memberId\": 2,\n    \"memberNickname\": \"lisi\",\n    \"memberIcon\": \"def\",\n    \"productId\": 4,\n    \"productName\": \"clothes T-shirt\",\n    \"productPic\": \"2\",\n    \"productSubTitle\": \"衣物\",\n    \"productPrice\": 16.23,\n    \"productDesc\": \"衣服 男 T恤 黑色\",\n    \"createTime\": \"2021-08-03\"\n  }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/createAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"createAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberId\": 2,\r\n    \"memberNickname\": \"lisi\",\r\n    \"memberIcon\": \"def\",\r\n    \"productId\": 4,\r\n    \"productName\": \"T恤\",\r\n    \"productPic\": \"2\",\r\n    \"productSubTitle\": \"衣物\",\r\n    \"productPrice\": 16.23,\r\n    \"productDesc\": \"衣服 男 T恤 黑色\",\r\n    \"createTime\": \"2021-08-03\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/listAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/listAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"listAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/listByMemberId?memberId=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/listByMemberId?memberId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"listByMemberId"
+					],
+					"query": [
+						{
+							"key": "memberId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/listByProductId?productId=4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/listByProductId?productId=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"listByProductId"
+					],
+					"query": [
+						{
+							"key": "productId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/listPagedMemberReadHistory?page=2&size=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/listPagedMemberReadHistory?page=2&size=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"listPagedMemberReadHistory"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2"
+						},
+						{
+							"key": "size",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/listMemberReadHistoryByExample",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"memberId\": 1,\r\n    \"memberNickname\": \"zhangsan\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/listMemberReadHistoryByExample",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"listMemberReadHistoryByExample"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/listByText?text=clothes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/listByText?text=clothes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"listByText"
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "clothes"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/listMemberProductReadHis?memberId=2&productId=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/listMemberProductReadHis?memberId=2&productId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"listMemberProductReadHis"
+					],
+					"query": [
+						{
+							"key": "memberId",
+							"value": "2"
+						},
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/delete?ids=610fae350323663af7f0477e&ids=610fae350323663af7f0477f",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/delete?ids=610fae350323663af7f0477e&ids=610fae350323663af7f0477f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "ids",
+							"value": "610fae350323663af7f0477e"
+						},
+						{
+							"key": "ids",
+							"value": "610fae350323663af7f0477f"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/update",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"610fb0d20323663af7f04780\",\r\n    \"memberId\": 1,\r\n    \"memberNickname\": \"zhangsan\",\r\n    \"memberIcon\": \"abc\",\r\n    \"productId\": 1,\r\n    \"productName\": \"gaoda\",\r\n    \"productPic\": \"1\",\r\n    \"productSubTitle\": \"玩具-更新1\",\r\n    \"productPrice\": 6.276,\r\n    \"productDesc\": \"机器人玩具 \",\r\n    \"createTime\": \"2021-08-08T10:24:18.771+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/insertOrUpdate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"610fb0d20323663af7f04760\",\r\n    \"memberId\": 1,\r\n    \"memberNickname\": \"zhangsan\",\r\n    \"memberIcon\": \"abc\",\r\n    \"productId\": 1,\r\n    \"productName\": \"gaoda\",\r\n    \"productPic\": \"1\",\r\n    \"productSubTitle\": \"玩具-更新4\",\r\n    \"productPrice\": 6.276,\r\n    \"productDesc\": \"机器人玩具 \",\r\n    \"createTime\": \"2021-08-08T10:24:18.771+00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/insertOrUpdate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"insertOrUpdate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/countByProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/countByProducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"countByProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/countReadHistoryByMember?memberId=2",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/countReadHistoryByMember?memberId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"countReadHistoryByMember"
+					],
+					"query": [
+						{
+							"key": "memberId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/member/readHistory/countReadHistoryByMemberAndProduct?memberId=2&productId=1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/member/readHistory/countReadHistoryByMemberAndProduct?memberId=2&productId=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"member",
+						"readHistory",
+						"countReadHistoryByMemberAndProduct"
+					],
+					"query": [
+						{
+							"key": "memberId",
+							"value": "2"
+						},
+						{
+							"key": "productId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

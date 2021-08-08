@@ -1,5 +1,6 @@
 package com.peng.mongo.service;
 
+import com.peng.mongo.model.MongoMemberIDAndProductID;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import org.springframework.data.domain.Page;
 
@@ -68,7 +69,7 @@ public interface MemberReadHistoryService {
     /**
      * 根据商品描述模糊查找
      */
-    List<MongoMemberReadHistory> listByProductDesc(String productDesc);
+    List<MongoMemberReadHistory> listByText(String productDesc);
 
     /**
      *  查询某个用户某个产品的浏览你信息
@@ -76,17 +77,17 @@ public interface MemberReadHistoryService {
     List<MongoMemberReadHistory> listMemberProductReadHis(Long memberId, Long productId);
 
     /**
-     *  统计浏览产品总价格（测试用，没啥意义）
+     *  统计浏览产品浏览次数
      */
-    List<MongoMemberReadHistory> countByProducts();
+    List<MongoMemberIDAndProductID> countByProducts();
 
     /**
-     *  统计用户浏览次数
+     *  统计用户浏览商品个数
      */
     Long countReadHistoryByMember(Long memberId);
 
     /**
      *  统计用户不同商品浏览次数
      */
-    Long countReadHistoryByMemberAndProduct(Long memberId);
+    Long countReadHistoryByMemberAndProduct(Long memberId, Long productId);
 }

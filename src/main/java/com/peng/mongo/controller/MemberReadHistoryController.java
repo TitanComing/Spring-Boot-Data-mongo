@@ -1,6 +1,7 @@
 package com.peng.mongo.controller;
 
 import com.peng.mongo.common.api.CommonResult;
+import com.peng.mongo.model.MongoMemberIDAndProductID;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,11 @@ public class MemberReadHistoryController {
     }
 
     @RequestMapping(value = "/createAll", method = RequestMethod.POST)
-    public CommonResult<List<MongoMemberReadHistory>> create(@RequestBody List<MongoMemberReadHistory> memberReadHistoryList) {
+    public CommonResult<List<MongoMemberReadHistory>> createAll(@RequestBody List<MongoMemberReadHistory> memberReadHistoryList) {
         return CommonResult.success(memberReadHistoryService.insertAll(memberReadHistoryList));
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public CommonResult<Integer> delete(@RequestParam("ids") List<String> ids) {
         int count = memberReadHistoryService.delete(ids);
         if (count > 0) {
@@ -47,7 +48,7 @@ public class MemberReadHistoryController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public CommonResult<MongoMemberReadHistory> update(@RequestBody MongoMemberReadHistory memberReadHistory) {
-        return CommonResult.success(memberReadHistoryService.insert(memberReadHistory));
+        return CommonResult.success(memberReadHistoryService.update(memberReadHistory));
     }
 
     @RequestMapping(value = "/insertOrUpdate", method = RequestMethod.POST)
@@ -84,6 +85,13 @@ public class MemberReadHistoryController {
         return CommonResult.success(memberReadHistoryService.listMemberReadHistoryByExample(memberReadHistory));
     }
 
+    //一个集合只能有一个文本搜索索引，但是该索引可以覆盖多个字段
+    @RequestMapping(value = "/listByText", method = RequestMethod.GET)
+    public CommonResult<List<MongoMemberReadHistory>> listByProductDesc(@RequestParam("text") String text) {
+        List<MongoMemberReadHistory> memberReadHistoryList = memberReadHistoryService.listByText(text);
+        return CommonResult.success(memberReadHistoryList);
+    }
+
     @RequestMapping(value = "/listMemberProductReadHis", method = RequestMethod.GET)
     public CommonResult<List<MongoMemberReadHistory>> listMemberProductReadHis(@RequestParam("memberId") long memberId, @RequestParam("productId") long productId) {
       List<MongoMemberReadHistory> memberReadHistoryList = memberReadHistoryService.listMemberProductReadHis(memberId, productId);
@@ -91,8 +99,8 @@ public class MemberReadHistoryController {
     }
 
     @RequestMapping(value = "/countByProducts", method = RequestMethod.GET)
-    public CommonResult<List<MongoMemberReadHistory>> countByProducts() {
-        List<MongoMemberReadHistory> memberReadHistoryList = memberReadHistoryService.countByProducts();
+    public CommonResult<List<MongoMemberIDAndProductID>> countByProducts() {
+        List<MongoMemberIDAndProductID> memberReadHistoryList = memberReadHistoryService.countByProducts();
         return CommonResult.success(memberReadHistoryList);
     }
 
@@ -103,14 +111,10 @@ public class MemberReadHistoryController {
     }
 
     @RequestMapping(value = "/countReadHistoryByMemberAndProduct", method = RequestMethod.GET)
-    public CommonResult<Long> countReadHistoryByMemberAndProduct(@RequestParam("memberId") long memberId) {
-        Long count = memberReadHistoryService.countReadHistoryByMemberAndProduct(memberId);
+    public CommonResult<Long> countReadHistoryByMemberAndProduct(@RequestParam("memberId") long memberId,@RequestParam("productId") long productId) {
+        Long count = memberReadHistoryService.countReadHistoryByMemberAndProduct(memberId,productId);
         return CommonResult.success(count);
     }
 
-    @RequestMapping(value = "/listByProductDesc", method = RequestMethod.GET)
-    public CommonResult<List<MongoMemberReadHistory>> listByProductDesc(@RequestParam("productDesc") String productDesc) {
-        List<MongoMemberReadHistory> memberReadHistoryList = memberReadHistoryService.listByProductDesc(productDesc);
-        return CommonResult.success(memberReadHistoryList);
-    }
+
 }

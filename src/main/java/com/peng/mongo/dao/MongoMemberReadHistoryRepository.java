@@ -1,6 +1,7 @@
 package com.peng.mongo.dao;
 
 
+import com.peng.mongo.model.MongoMemberIDAndProductID;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.TextCriteria;
@@ -30,11 +31,11 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
     List<MongoMemberReadHistory> findByProductId(Long productId, Sort sort);
 
     /**
-     * 根据商品描述搜索
+     * 根据文本搜索
      *
-     * @param criteria 商品描述
+     * @param criteria 文本描述
      */
-    List<MongoMemberReadHistory> findAllByProductDesc(TextCriteria criteria);
+    List<MongoMemberReadHistory> findAllBy(TextCriteria criteria);
 
     /**
      * 查询某个用户某个产品的浏览你信息
@@ -46,27 +47,31 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
     List<MongoMemberReadHistory> findMemberProductReadHis(Long memberId, Long productId);
 
     /**
-     * 统计浏览产品总价格（测试用，没啥意义）
+     * 统计浏览产品浏览次数
      *
      * @param sort 排序方式
      */
-    @Aggregation("{$group:{_id:$productId, totalPrice:{$sum:$productPrice}}")
-    List<MongoMemberReadHistory> countByProducts(Sort sort);
+    //db.mongoMemberReadHistory.aggregate([{$group:{_id:{memberId:"$memberId",productId:"$productId"},total:{$sum:1}}}]).pretty()
+    @Aggregation("{$group:{_id:{memberId:'$memberId',productId:'$productId'}, total:{$sum:1}}}")
+    List<MongoMemberIDAndProductID> countByProducts(Sort sort);
 
     /**
-     * 统计用户浏览次数
+     * 统计用户浏览商品个数
      *
      * @param memberId 用户id
      */
-    @Aggregation(pipeline = {"{$match:{memberId: ?0}}", "{$count: total}"})
+    //mongodb3.4 才支持$count的聚合操作，早期版本需要用group
+    // db.mongoMemberReadHistory.aggregate([{$match:{memberId: 2}},{$group:{_id:null, total:{$sum:1}}},{$project:{_id:0,total:1}}]).pretty()
+    @Aggregation(pipeline = {"{$match:{memberId: ?0}}", "{$group:{_id:null, total:{$sum:1}}}","{$project:{_id:0,total:1}}"})
     Long countReadHistoryByMember(Long memberId);
 
     /**
-     * 统计用户商品的浏览次数
+     * 统计用户某个商品的浏览次数
      *
      * @param memberId 用户id
      */
-    @Aggregation(pipeline = {"{$match:{memberId: ?0}}", "{$group:{_id:$productId}}", "{$count: total}"})
-    Long countReadHistoryByMemberAndProduct(Long memberId);
+    //> db.mongoMemberReadHistory.aggregate([{$match:{memberId: 2}},{$match:{productId:1}},{$group:{_id:null, total:{$sum:1}}},{$project:{_id:0,total:1}}]).pretty()
+    @Aggregation(pipeline = {"{$match:{memberId: ?0}}", "{$match:{productId:?1}}","{$group:{_id:null, total:{$sum:1}}}","{$project:{_id:0,total:1}}"})
+    Long countReadHistoryByMemberAndProduct(Long memberId, Long productId);
 
 }

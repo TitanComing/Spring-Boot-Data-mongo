@@ -1,6 +1,7 @@
 package com.peng.mongo.service.impl;
 
 import com.peng.mongo.dao.MongoMemberReadHistoryRepository;
+import com.peng.mongo.model.MongoMemberIDAndProductID;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
 import lombok.extern.log4j.Log4j2;
@@ -68,7 +69,11 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
 
     @Override
     public MongoMemberReadHistory insertOrUpdate(MongoMemberReadHistory memberReadHistory) {
-        return memberReadHistoryRepository.save(memberReadHistory);
+        if(memberReadHistoryRepository.findById(memberReadHistory.getId()).isPresent()){
+            return memberReadHistoryRepository.save(memberReadHistory);
+        }
+        memberReadHistory.setId(null);
+        return memberReadHistoryRepository.insert(memberReadHistory);
     }
 
     @Override
@@ -83,7 +88,7 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
 
     @Override
     public List<MongoMemberReadHistory> listByProductId(Long productId) {
-        return memberReadHistoryRepository.findByProductId(productId, Sort.by(Sort.Order.desc("productPrice"), Sort.Order.asc("productPic")));
+        return memberReadHistoryRepository.findByProductId(productId, Sort.by(Sort.Order.desc("productPrice")));
     }
 
     @Override
@@ -101,9 +106,10 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
-    public List<MongoMemberReadHistory> listByProductDesc(String description) {
-        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(description);
-        return memberReadHistoryRepository.findAllByProductDesc(criteria);
+    public List<MongoMemberReadHistory> listByText(String text) {
+        //默认是英文文本搜索
+        TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingPhrase(text);
+        return memberReadHistoryRepository.findAllBy(criteria);
     }
 
     @Override
@@ -112,7 +118,7 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
-    public List<MongoMemberReadHistory> countByProducts() {
+    public List<MongoMemberIDAndProductID> countByProducts() {
         return memberReadHistoryRepository.countByProducts(Sort.by(Sort.Direction.DESC, "productPrice"));
     }
 
@@ -122,7 +128,7 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
-    public Long countReadHistoryByMemberAndProduct(Long memberId) {
-        return memberReadHistoryRepository.countReadHistoryByMemberAndProduct(memberId);
+    public Long countReadHistoryByMemberAndProduct(Long memberId, Long productId) {
+        return memberReadHistoryRepository.countReadHistoryByMemberAndProduct(memberId, productId);
     }
 }

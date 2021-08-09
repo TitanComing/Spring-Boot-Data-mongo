@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ef366da0-41ca-4ba9-8751-029f4d8fa4b7",
+		"_postman_id": "0e37df01-420e-471d-a5e6-6a3aa2915134",
 		"name": "spring-data-mongodb-demo",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -452,6 +452,87 @@
 							"key": "productId",
 							"value": "1"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"id\": \"16628\",\r\n    \"name\": \"26th & Broadway\",\r\n    \"street\": \"1140 Broadway\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.989015,\r\n        40.743827\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"7427\",\r\n    \"name\": \"29th & Park-Park Ave. South\",\r\n    \"street\": \"424 Park Avenue South\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.983749,\r\n        4.074426\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"7263\",\r\n    \"name\": \"43rd & 8th\",\r\n    \"street\": \"684 Eighth Avenue\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.988994,\r\n        40.758001\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"7215\",\r\n    \"name\": \"1585 Broadway (47th)\",\r\n    \"street\": \"1585 Broadway\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.985235,\r\n        40.759686\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"7393\",\r\n    \"name\": \"49th & 8th-World Wide Plaza\",\r\n    \"street\": \"325 W 49th St\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.987472,\r\n        40.762176\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"7316\",\r\n    \"name\": \"31st & 7th\",\r\n    \"street\": \"370 7th Avenue\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.992372,\r\n        40.74899\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"7540\",\r\n    \"name\": \"17th and Broadway (41 Union Square\",\r\n    \"street\": \"41 Union Square West\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.990558,\r\n        40.737035\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"7611\",\r\n    \"name\": \"40th & Lexington (360 Lex)\",\r\n    \"street\": \"360 Lexington Avenue\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.977043,\r\n        40.750332\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"15461\",\r\n    \"name\": \"Jackson Square at Greenwich Ave\",\r\n    \"street\": \"122 Greenwich Avenue, (space A)\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -74.002217,\r\n        40.738441\r\n      ]\r\n    }\r\n  },\r\n  {\r\n    \"id\": \"852\",\r\n    \"name\": \"1656 Broadway\",\r\n    \"street\": \"1656 Broadway\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n      \"type\": \"Point\",\r\n      \"coordinates\": [\r\n        -73.983345,\r\n        40.762092\r\n      ]\r\n    }\r\n  }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/starbucks/location/createAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starbucks",
+						"location",
+						"createAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/starbucks/location/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"7427\",\r\n    \"name\": \"29th & Park-Park Ave. South\",\r\n    \"street\": \"424 Park Avenue South\",\r\n    \"city\": \"New York\",\r\n    \"location\": {\r\n        \"type\": \"Point\",\r\n        \"coordinates\": [\r\n            -2.6637,\r\n            54.6944\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/starbucks/location/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starbucks",
+						"location",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/starbucks/location/deleteAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/starbucks/location/deleteAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"starbucks",
+						"location",
+						"deleteAll"
 					]
 				}
 			},

@@ -1,9 +1,9 @@
-package com.peng.mongo.model;
+package com.peng.mongo.common.component;
 
 import lombok.Data;
 
 @Data
-public class MongoMemberIDAndProductID {
+public class MemberIDAndProductID {
     private String id;
     private Long total;
 }

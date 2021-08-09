@@ -1,7 +1,7 @@
 package com.peng.mongo.dao;
 
 
-import com.peng.mongo.model.MongoMemberIDAndProductID;
+import com.peng.mongo.common.component.MemberIDAndProductID;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.TextCriteria;
@@ -32,7 +32,7 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
 
     /**
      * 根据文本搜索
-     *
+     * 需要创建“text”索引，示例：db.test.createIndex({productName:"text",description:"text"})
      * @param criteria 文本描述
      */
     List<MongoMemberReadHistory> findAllBy(TextCriteria criteria);
@@ -53,7 +53,7 @@ public interface MongoMemberReadHistoryRepository extends MongoRepository<MongoM
      */
     //db.mongoMemberReadHistory.aggregate([{$group:{_id:{memberId:"$memberId",productId:"$productId"},total:{$sum:1}}}]).pretty()
     @Aggregation("{$group:{_id:{memberId:'$memberId',productId:'$productId'}, total:{$sum:1}}}")
-    List<MongoMemberIDAndProductID> countByProducts(Sort sort);
+    List<MemberIDAndProductID> countByProducts(Sort sort);
 
     /**
      * 统计用户浏览商品个数

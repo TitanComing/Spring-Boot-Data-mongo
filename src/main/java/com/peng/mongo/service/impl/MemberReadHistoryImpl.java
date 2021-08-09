@@ -1,7 +1,7 @@
 package com.peng.mongo.service.impl;
 
 import com.peng.mongo.dao.MongoMemberReadHistoryRepository;
-import com.peng.mongo.model.MongoMemberIDAndProductID;
+import com.peng.mongo.common.component.MemberIDAndProductID;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
 import lombok.extern.log4j.Log4j2;
@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 @Log4j2
 @Service
-public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
+public class MemberReadHistoryImpl implements MemberReadHistoryService {
     @Autowired
     private MongoMemberReadHistoryRepository memberReadHistoryRepository;
 
@@ -118,7 +118,7 @@ public class MongoMemberReadHistoryImpl implements MemberReadHistoryService {
     }
 
     @Override
-    public List<MongoMemberIDAndProductID> countByProducts() {
+    public List<MemberIDAndProductID> countByProducts() {
         return memberReadHistoryRepository.countByProducts(Sort.by(Sort.Direction.DESC, "productPrice"));
     }
 

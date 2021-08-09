@@ -1,7 +1,7 @@
 package com.peng.mongo.controller;
 
 import com.peng.mongo.common.api.CommonResult;
-import com.peng.mongo.model.MongoMemberIDAndProductID;
+import com.peng.mongo.common.component.MemberIDAndProductID;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.service.MemberReadHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,8 +99,8 @@ public class MemberReadHistoryController {
     }
 
     @RequestMapping(value = "/countByProducts", method = RequestMethod.GET)
-    public CommonResult<List<MongoMemberIDAndProductID>> countByProducts() {
-        List<MongoMemberIDAndProductID> memberReadHistoryList = memberReadHistoryService.countByProducts();
+    public CommonResult<List<MemberIDAndProductID>> countByProducts() {
+        List<MemberIDAndProductID> memberReadHistoryList = memberReadHistoryService.countByProducts();
         return CommonResult.success(memberReadHistoryList);
     }
 

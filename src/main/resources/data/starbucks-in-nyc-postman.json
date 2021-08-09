@@ -1,0 +1,132 @@
+[
+  {
+    "id": "16628",
+    "name": "26th & Broadway",
+    "street": "1140 Broadway",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.989015,
+        40.743827
+      ]
+    }
+  },
+  {
+    "id": "7427",
+    "name": "29th & Park-Park Ave. South",
+    "street": "424 Park Avenue South",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.983749,
+        4.074426
+      ]
+    }
+  },
+  {
+    "id": "7263",
+    "name": "43rd & 8th",
+    "street": "684 Eighth Avenue",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.988994,
+        40.758001
+      ]
+    }
+  },
+  {
+    "id": "7215",
+    "name": "1585 Broadway (47th)",
+    "street": "1585 Broadway",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.985235,
+        40.759686
+      ]
+    }
+  },
+  {
+    "id": "7393",
+    "name": "49th & 8th-World Wide Plaza",
+    "street": "325 W 49th St",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.987472,
+        40.762176
+      ]
+    }
+  },
+  {
+    "id": "7316",
+    "name": "31st & 7th",
+    "street": "370 7th Avenue",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.992372,
+        40.74899
+      ]
+    }
+  },
+  {
+    "id": "7540",
+    "name": "17th and Broadway (41 Union Square",
+    "street": "41 Union Square West",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.990558,
+        40.737035
+      ]
+    }
+  },
+  {
+    "id": "7611",
+    "name": "40th & Lexington (360 Lex)",
+    "street": "360 Lexington Avenue",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.977043,
+        40.750332
+      ]
+    }
+  },
+  {
+    "id": "15461",
+    "name": "Jackson Square at Greenwich Ave",
+    "street": "122 Greenwich Avenue, (space A)",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -74.002217,
+        40.738441
+      ]
+    }
+  },
+  {
+    "id": "852",
+    "name": "1656 Broadway",
+    "street": "1656 Broadway",
+    "city": "New York",
+    "location": {
+      "type": "Point",
+      "coordinates": [
+        -73.983345,
+        40.762092
+      ]
+    }
+  }
+]

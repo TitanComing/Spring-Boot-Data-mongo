@@ -14,7 +14,7 @@ import java.util.Date;
  * Create by peng on 2021/8/3.
  */
 @Data
-@Document
+@Document(collection = "mongoMemberReadHistory")
 public class MongoMemberReadHistory {
     @Id
     private String id;

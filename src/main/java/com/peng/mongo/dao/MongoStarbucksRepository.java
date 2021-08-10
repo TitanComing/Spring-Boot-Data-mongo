@@ -4,6 +4,7 @@ import com.peng.mongo.model.MongoStarbucks;
 import org.springframework.data.geo.Distance;
 import org.springframework.data.geo.Point;
 import org.springframework.data.geo.Polygon;
+import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
@@ -22,5 +23,5 @@ public interface MongoStarbucksRepository extends MongoRepository<MongoStarbucks
      * @param point 地理点
      * @param distance 范围
      */
-    List<MongoStarbucks> findByLocationNear(Point point, Distance distance);
+    List<MongoStarbucks> findByLocationNear(GeoJsonPoint point, Distance distance);
 }

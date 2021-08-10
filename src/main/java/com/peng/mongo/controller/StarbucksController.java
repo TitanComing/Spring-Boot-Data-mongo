@@ -2,6 +2,7 @@ package com.peng.mongo.controller;
 
 import com.peng.mongo.common.api.CommonResult;
 import com.peng.mongo.common.component.CustomPoint;
+import com.peng.mongo.common.component.CustomPointWithRange;
 import com.peng.mongo.model.MongoMemberReadHistory;
 import com.peng.mongo.model.MongoStarbucks;
 import com.peng.mongo.service.StarbucksService;
@@ -43,5 +44,13 @@ public class StarbucksController {
         List<MongoStarbucks> mongoStarbucksList = starbucksService.findStarBucksWithin(customPoints);
         return CommonResult.success(mongoStarbucksList);
     }
+
+    @RequestMapping(value = "/findStarBucksNear", method = RequestMethod.POST)
+    public CommonResult<List<MongoStarbucks>> findStarBucksWithin(@RequestBody CustomPointWithRange customPointWithRange) {
+        List<MongoStarbucks> mongoStarbucksList = starbucksService.findStarBucksNear(customPointWithRange);
+        return CommonResult.success(mongoStarbucksList);
+    }
+
+
 
 }

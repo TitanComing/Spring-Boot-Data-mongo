@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public class CustomPoint {
     //经度值
-    private float lng;
+    private double longitude;
     //维度值
-    private float lat;
+    private double latitude;
 }

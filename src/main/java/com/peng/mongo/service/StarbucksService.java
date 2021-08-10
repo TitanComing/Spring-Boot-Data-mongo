@@ -1,6 +1,7 @@
 package com.peng.mongo.service;
 
 import com.peng.mongo.common.component.CustomPoint;
+import com.peng.mongo.common.component.CustomPointWithRange;
 import com.peng.mongo.model.MongoStarbucks;
 import org.springframework.data.geo.Polygon;
 
@@ -31,4 +32,6 @@ public interface StarbucksService {
      * 查询某个范围内的星巴克
      */
     List<MongoStarbucks> findStarBucksWithin(List<CustomPoint> customPoints);
+
+    List<MongoStarbucks> findStarBucksNear(CustomPointWithRange customPointWithRange);
 }
